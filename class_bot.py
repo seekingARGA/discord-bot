@@ -7,6 +7,7 @@ from bot_logic import gen_pass
 import os
 import requests
 
+tree_count = 0
 description = "Contoh bot Discord dengan berbagai fitur."
 
 # Bot intents
@@ -15,7 +16,7 @@ intents.members = True
 intents.message_content = True
 
 # Bot instance (with custom help)
-bot = commands.Bot(command_prefix='$', description=description, intents=intents, help_command=None)
+bot = commands.Bot(command_prefix='/', description=description, intents=intents, help_command=None)
 
 @bot.event
 async def on_ready():
@@ -146,6 +147,41 @@ async def simpan(ctx):
     else:
         await ctx.send("Anda lupa mengunggah :(")
 
+
+TIPS = [
+
+    "Daur ulanglah sampah seperti botol plastik dan lain-lain!",
+    "Coba hafalkan tipe-tipe tempat sampah! Seperti: Hijau untuk makanan, Kuning untuk sampah yg tidak bisa terurai secara alami!",
+    "Mengurangi penggunaan plastik sekali pakai dan beralih ke produk yang ramah lingkungan. ",
+    "Menanamlah pohon di hutan yg gundul!"
+
+]
+@bot.command()
+async def tip(ctx):
+    await ctx.send(random.choice(TIPS))
+
+
+
+FACTS = [
+
+    "Setiap 1 pohon bisa menyerap sekitar 21 kg CO₂ per tahun!",
+    "Mengurangi konsumsi daging merah dapat menurunkan jejak karbonmu.",
+    "Berjalan kaki atau naik sepeda = nol emisi karbon 🚲",
+
+]
+@bot.command()
+async def facts(ctx):
+    await ctx.send(random.choice(FACTS))
+
+@bot.command()
+async def plant(ctx):
+    global tree_count
+    tree_count += 1
+    if tree_count <= 30:
+       await ctx.send("🌳" * tree_count)
+    else:
+        await ctx.send("Sekarang huntan gundul mempunyai banyak pohon!!")
+
 @bot.command()
 async def help(ctx):
     help_message = """
@@ -170,9 +206,11 @@ showfile [nama]     → tampilkan file lokal
 simpan              → simpan file dari attachment
 joined [@user]      → lihat kapan user bergabung
 bye                 → kirim salam
+animal              → meme tentang binatang
+
 """
     await ctx.send(help_message)
 
 # Run the bot
-bot.run('token!!!!!')
+bot.run('token!!!!')
 
