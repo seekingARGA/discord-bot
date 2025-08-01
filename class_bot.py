@@ -46,7 +46,7 @@ async def exp(ctx, left: int, right: int):
 # Meme Command
 @bot.command()
 async def meme(ctx):
-    with open('images/meme1.jpg', 'rb') as f:
+    with open('meme/meme1.png', 'rb') as f:
         picture = discord.File(f)
     await ctx.send(file=picture)
 
@@ -93,6 +93,12 @@ async def repeat(ctx, times: int, content='repeating...'):
 @bot.command()
 async def pw(ctx):
     await ctx.send(f'Kata sandi yang dihasilkan: {gen_pass(10)}')
+
+@bot.command()
+async def animal(ctx):
+    with open('meme/animalmeme.png', 'rb') as f:
+        picture = discord.File(f)
+    await ctx.send(file=picture)
 
 @bot.command()
 async def bye(ctx):
@@ -168,5 +174,5 @@ bye                 → kirim salam
     await ctx.send(help_message)
 
 # Run the bot
-bot.run('token!!!')
+bot.run('token!!!!!')
 
